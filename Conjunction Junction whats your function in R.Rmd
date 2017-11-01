@@ -1,0 +1,440 @@
+---
+title: "Conjunction Junction, what's your function in R?"
+output: 
+  html_document: 
+    highlight: textmate
+    toc: yes
+    toc_float: 
+      collapsed: no
+    theme: cosmo
+---
+
+## Introduction and Notes about Functions in R
+
+R is a powerful programming language for statistical computing with many packages and tools.
+
+The goal of this article is to arm you with tools and techniques for using creating and using functions.
+
+Below are some notes from various resources. Below each link is text from the resource.
+
+## Key info
+
+http://dept.stat.lsa.umich.edu/~jerrick/courses/stat701/notes/functions.html
+
+In R, every command you run is a function. Sometimes this is obvious, such as
+
+lm(y ~ x)
+
+We can examine the source code of any function by calling the function without parentheses:
+
+library(stringr)
+str_which
+
+https://bids.github.io/2017-01-12-ucb/lessons/R/02-func-R.html
+
+You see the result of this documentation when you look at the help file for a given function, e.g. ?read.csv.
+
+http://pj.freefaculty.org/guides/Rcourse/functions-1/functions-1.pdf
+
+3 reasons to write functions
+
+1. Preserve your sanity: isolate specific work.
+
+1.A Side benefit: preserve sanity of others who have to read your
+code
+
+2. Facilitate re-use of your ideas
+
+3. Co-operate with R functions like lapply() and boot() which
+REQUIRE functions from us.
+
+http://adv-r.had.co.nz/
+
+http://adv-r.had.co.nz/Functions.html
+
+“To understand computations in R, two slogans are helpful:
+
+Everything that exists is an object.
+Everything that happens is a function call."
+— John Chambers
+
+Functions are a fundamental building block of R. The most important thing to understand about R is that functions are objects in their own right. You can work with them exactly the same way you work with any other type of object. All R functions have three parts:
+
+the body(), the code inside the function.
+
+the formals(), the list of arguments which controls how you can call the function.
+
+the environment(), the “map” of the location of the function’s variables.
+
+Scoping is the set of rules that govern how R looks up the value of a symbol. R has two types of scoping: lexical scoping, implemented automatically at the language level, and dynamic scoping, used in select functions to save typing during interactive analysis.
+
+http://r4ds.had.co.nz/functions.html
+
+https://jrnold.github.io/e4qf/functions.html
+
+One of the best ways to improve your reach as a data scientist is to write functions. Functions allow you to automate common tasks in a more powerful and general way than copy-and-pasting.
+
+When should you write a function?
+
+You should consider writing a function whenever you’ve copied and pasted a block of code more than twice (i.e. you now have three copies of the same code).
+
+Dot-dot-dot (…)
+
+Many functions in R take an arbitrary number of inputs.
+
+... (pronounced dot-dot-dot). This special argument captures any number of arguments that aren’t otherwise matched.
+
+It’s useful because you can then send those ... on to another function. This is a useful catch-all if your function primarily wraps another function.
+
+Writing pipeable functions
+
+If you want to write your own pipeable functions, it’s important to think about the return value. Knowing the return value’s object type will mean that your pipeline will “just work”. For example, with dplyr and tidyr the object type is the data frame.
+
+http://pj.freefaculty.org/guides/Rcourse/functions-1/functions-1.pdf
+
+How To Name Functions
+
+Don’t use names for functions that are already in widespread
+use, like lm, seq, rep, etc.
+
+Use Objective C style variable and function names that smash words together, as in myRegression myCode
+
+R uses periods in function names to represent “object orientation” or “subclassing”, thus I avoid periods for simple punctuation.Ex: doSomething() is better than do.something
+
+Underscores are now allowed in function names.
+Ex: do something() would be OK
+
+http://neondataskills.org/R/Working-With-Functions
+
+Calling our own function is no different from calling any other built in R function that you are familiar with.
+
+Introduction to Functions in R
+https://www.youtube.com/watch?v=gl9opYcRxO8
+
+https://rpubs.com/williamsurles/292234
+
+Writing a function in R
+
+The parts of a function
+
+Argument
+Body
+Environment
+
+Return value is the last evaluated expression or the first evaluated return() expression
+Functions can be treated like usual R objects
+
+http://dept.stat.lsa.umich.edu/~jerrick/courses/stat701/notes/functions.html
+
+The output of the last line of code in the function is what the function returns. I’ve been implicitly using this earlier;  myFunc returns x - y and table1 returns the results from table.
+
+You can sometimes mess this up:
+
+myFunc <- function(x, y) {
+  z <- x + y
+}
+myFunc(2, 3)
+
+https://bids.github.io/2017-01-12-ucb/lessons/R/02-func-R.html
+
+In R, it is not necessary to include the return statement. R automatically returns whichever variable is on the last line of the body of the function. Since we are just learning, we will explicitly define the return statement.
+
+## Built-in Function
+
+https://www.tutorialspoint.com/r/r_functions.htm
+
+Simple examples of in-built functions are seq(), mean(), max(), sum(x) and paste(...) etc. They are directly called by user written programs.
+
+https://cran.r-project.org/doc/contrib/Short-refcard.pdf
+
+# R Function Types
+
+https://www.tutorialgateway.org/functions-in-r-programming/
+
+There are two types of functions in R Programming language:
+
+Library Functions: All the built-in functions supported by the R Language, or the R packages are called as Library function. You no need to worry about the logic inside the Library functions. In our previous articles, We used many library functions such as print(), sqrt() etc.
+
+User Defined Functions: Instead of relying only on built-in functions, R Programming allows us to create our own functions called as user defined functions. For example, if we want to calculate the Sales profits, or any mathematical calculations then we can place them in separate function with proper function name, and later we can call that function multiple time.
+
+https://www.datacamp.com/community/tutorials/functions-in-r-a-tutorial
+
+User Defined Functions (UDF)
+
+Whether you need to accomplish a particular task and are not aware that a dedicated function or library exists already or because by the time you spend googling for some existing solution, you can have already come out with your own, you will find yourself at some time typing...
+
+## Arguments
+
+https://bids.github.io/2017-01-12-ucb/lessons/R/02-func-R.html
+
+To be precise, R has three ways that arguments supplied
+
+by you are matched to the formal arguments of the function definition
+
+by complete name,
+by partial name (matching on initial n characters of the argument name), and
+by position.
+Arguments are matched in the manner outlined above in that order: by complete name, then by partial matching of names, and finally by position.
+
+## Key Points
+
+https://bids.github.io/2017-01-12-ucb/lessons/R/02-func-R.html
+
+Define a function using name <- function(...args...) {...body...}.
+Call a function using name(...values...).
+Each time a function is called, a new stack frame is created on the call stack to hold its arguments and local variables.
+R looks for variables in the current stack frame before looking for them at the top level.
+Use help(thing) to view help for something.
+Put comments at the beginning of functions to provide help for that function.
+Annotate your code!
+Specify default values for arguments when defining a function using name = value in the argument list.
+Arguments can be passed by matching based on name, by position, or by omitting them (in which case the default value is used).
+
+## Anonymous Functions in R
+
+https://www.datacamp.com/community/tutorials/functions-in-r-a-tutorial
+
+When you don’t give a name to a function, you are creating an anonymous function.
+
+## Load the function into the R session
+
+https://www.statmethods.net/management/userfunctions.html
+
+https://www.statmethods.net/interface/customizing.html
+
+You may want to store your own functions, and have them available in every session. You can customize the R environment to load your functions at start-up.
+
+https://nicercode.github.io/guides/functions/
+
+For R to be able to execute your function, it needs first to be read into memory. This is just like loading a library, until you do it the functions contained within it cannot be called.
+
+There are two methods for loading functions into the memory:
+
+Copy the function text and paste it into the console
+Use the source() function to load your functions from file.
+
+## Scoping
+
+http://dept.stat.lsa.umich.edu/~jerrick/courses/stat701/notes/functions.html
+
+Scoping and side effects
+
+Scope is an important and really complicated topic for functions - the short version is this:
+
+Any object created inside a function (including arguments passed to it) are destroyed when the functions returns.
+If an object doesn’t exist inside the function, R will look for an object outside the function.
+R functions should have no “side effects” - never modify an external object.
+
+https://www.stat.berkeley.edu/~statcur/Workshop2/Presentations/functions.pdf
+
+https://rpubs.com/Verley93/rprognotes
+
+Scoping rules determine how a value is associated with a free variable in a function
+
+Free variables = variables not explicitly defined in the function (not arguments, or local variables - variable defined in the function)
+
+R uses lexical/static scoping
+
+common alternative = dynamic scoping
+
+lexical scoping = values of free vars are searched in the environment in which the function is defined
+
+environment = collection of symbol/value pairs (x = 3.14)
+
+each package has its own environment
+
+only environment without parent environment is the empty environment
+
+closure/function closure = function + associated environment
+
+## Function components
+
+https://bookdown.org/Tazinho/Advanced-R-Solutions/functions.html
+
+Q: What function allows you to tell if an object is a function? What function allows you to tell if a function is a primitive function?
+A: You can test objects with is.function and is.primitive.
+
+Q: This code makes a list of all functions in the base package.
+
+objs <- mget(ls("package:base"), inherits = TRUE)
+funs <- Filter(is.function, objs)
+
+## Examples
+
+https://trendct.org/2017/03/17/tutorial-how-to-create-r-functions-and-packages/
+
+http://stat545.com/block011_write-your-own-function-01.html
+
+http://stat545.com/block011_write-your-own-function-02.html
+
+http://stat545.com/block011_write-your-own-function-03.html
+
+Powerful machines like dplyr,  purrr, and the built-in apply family of functions, are ready and waiting to apply your purpose-built functions to various bits of your data. If you can express your analytical wishes in a function, these tools will give you great power.
+
+Build that skateboard before you build the car or some fancy car part. A limited-but-functioning thing is very useful. It also keeps the spirits high.
+
+http://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/R/R3_BasicProgramming-R/R3_BasicProgramming-R8.html
+
+## Chaining Functions
+
+https://swcarpentry.github.io/r-novice-inflammation/02-func-R/
+
+This example showed the output of fahr_to_kelvin assigned to temp_k, which is then passed to kelvin_to_celsius to get the final result. It is also possible to perform this calculation in one line of code, by “chaining” functions together
+
+Key Points
+
+Define a function using name <- function(...args...) {...body...}.
+Call a function using name(...values...).
+R looks for variables in the current stack frame before looking for them at the top level.
+Use help(thing) to view help for something.
+Put comments at the beginning of functions to provide help for that function.
+Annotate your code!
+Specify default values for arguments when defining a function using name = value in the argument list.
+Arguments can be passed by matching based on name, by position, or by omitting them (in which case the default value is used).
+
+# What makes for a good function?
+
+https://nicercode.github.io/guides/functions/
+https://nicercode.github.io/intro/writing-functions.html
+
+It’s short
+
+ M Butcher @technosophos
+If you've written a function whose body is 2,996 lines of code, you're doing it wrong.
+12:55 PM - Apr 11, 2013
+ 4 4 Replies   15 15 Retweets   8 8 likes
+
+
+Performs a single operation
+
+ Tim Ottinger @tottinge
+The reason for writing a function is not to reuse its code, but to name the operation it performs.
+1:44 PM - Jan 22, 2013
+ 6 6 Replies   86 86 Retweets   27 27 likes
+
+Uses intuitive names
+
+ Gustavo Rod. Baldera @gbaldera
+"The name of a variable, function, or class, should answer all the big questions." - Uncle Bob Martin, Clean Code
+10:15 AM - Apr 24, 2013
+
+Using functions is just one tool in ensuring that your code will be easy for you to read in future, but it is an essential tool.
+
+ Justin Kimbrell @justin_kimbrell
+The more I write code, the more abstract it gets. And with more abstractions, the apps are easier to maintain. Been working for years...
+10:07 PM - Apr 29, 2013
+
+## Debugging
+
+R provides a number of functions for debugging, such as:
+
+traceback()
+debug()
+browser()
+trace()
+recover()
+
+https://stackoverflow.com/questions/30119628/stepping-through-a-pipeline-with-intermediate-results
+
+Use print
+
+https://data-flair.training/blogs/debugging-in-r-programming/
+
+traceback()
+If our code has already crashed and we want to know where the offending line is, try traceback(). This will (sometimes) show where abouts in the code the problem occurred.
+
+http://dept.stat.lsa.umich.edu/~jerrick/courses/stat701/notes/debugging.html
+
+https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio
+
+https://www.rstudio.com/products/rstudio/release-notes/debugging-with-rstudio/
+
+https://www.rstudio.com/products/rstudio/release-notes/breakpoint-troubleshooting-with-rstudio/
+
+https://stat.ethz.ch/R-manual/R-devel/library/base/html/debug.html
+
+http://seananderson.ca/2013/08/23/debugging-r.html
+
+https://rforpublichealth.blogspot.com/2014/06/how-to-write-and-debug-r-function.html
+https://rforpublichealth.blogspot.com/2014/07/
+
+http://www.win-vector.com/blog/2017/03/debugging-pipelines-in-r-with-bizarro-pipe-and-eager-assignment/
+
+http://www.win-vector.com/blog/2017/01/using-the-bizarro-pipe-to-debug-magrittr-pipelines-in-r/
+
+https://geographicdatascience.com/2017/02/02/non-standard-evaluation-and-debugging-in-r/
+
+https://github.com/rstudio/rstudio/issues/1548
+
+http://cfss.uchicago.edu/program_pipes.html
+
+## Packages Intro
+
+https://www.datacamp.com/community/tutorials/r-packages-guide
+
+What’s The Difference Between A Package And A Library?
+
+Speaking about the library() function, sometimes there is a confusion between a package and a library, and you can find people calling “libraries” to packages.
+
+Please don’t get confused: library() is the command used to load a package, and it refers to the place where the package is contained, usually a folder on your computer, while a package is the collection of functions bundled conveniently.
+
+Maybe it can help a quote from Hadley Wickham, Chief data scientist at RStudio, and instructor of the “Writing functions in R” DataCamp course:
+
+@ijlyttle a package is a like a book, a library is like a library; you use library() to check a package out of the library #rsats
+— Hadley Wickham (@hadleywickham) December 8, 2014
+
+help(vioplot, package = "vioplot")
+
+library(babynames)
+ls("package:babynames")
+
+vignette(package = "ggplot2")
+
+vignette("ggplot2-specs")
+
+## Package
+
+http://r-pkgs.had.co.nz
+
+https://rpubs.com/nishantsbi/242168
+https://github.com/jtleek/rpackages
+
+When to start writing an R package
+As soon as you have 2 functions.
+
+Why 2? After you have more than one function it starts to get easy to lose track of what your functions do, it starts to be tempting to name your functions foo or tempfunction or some other such nonsense. You are also tempted to put all of the functions in one file and just source it. That was what I did whwn i started my first analytics project, which ended up being an epically comical set of about +2,000 lines of code in one R file. Ask my project lead about it sometime, he probably is still laughing about it.
+
+https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/
+
+Step 2: Add functions
+If you’re reading this, you probably have functions that you’ve been meaning to create a package for.
+
+The package roxygen2 that makes everything amazing and simple. The way it works is that you add special comments to the beginning of each function, that will later be compiled into the correct format for package documentation. 
+
+## Advanced
+
+http://adv-r.had.co.nz/Functional-programming.html
+
+http://adv-r.had.co.nz/Functionals.html#functionals
+
+http://adv-r.had.co.nz/Function-operators.html#function-operators
+
+## Other Resources
+
+https://cran.r-project.org/doc/manuals/R-intro.html#Writing-your-own-R-intro.html#Writing-your-own-functions
+
+https://www.programiz.com/r-programming/function
+
+http://www.dummies.com/programming/r/how-to-create-a-function-in-r/
+
+https://cran.r-project.org/doc/contrib/Lemon-kickstart/kr_rfunc.html
+
+http://faculty.nps.edu/sebuttre/home/R/functions.html
+
+http://www.stat.cmu.edu/~cshalizi/402/programming/writing-functions.pdf
+
+https://softwareengineering.stackexchange.com/questions/123159/what-are-the-specific-meanings-of-the-terms-functions-methods-procedures-and?rq=1
+
+
+
+
